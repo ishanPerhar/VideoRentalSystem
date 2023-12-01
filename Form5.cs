@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,22 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Security.Cryptography.X509Certificates;
 
 namespace VideoRentalSystem
 {
-    public partial class loginfrom : Form
+    public partial class Form5 : Form
     {
         public SqlConnection myConnection;
         public SqlCommand myCommand;
         public SqlDataReader myReader;
-
-        public loginfrom()
+        public Form5()
         {
             InitializeComponent();
 
+
             String connectionString = "Server = DESKTOP-D0DDBSH; Database = Project; Trusted_Connection = yes;";
 
-            SqlConnection myConnection = new SqlConnection(connectionString); // Timeout in seconds
+            SqlConnection myConnection = new SqlConnection(connectionString);
 
             try
             {
@@ -36,35 +37,22 @@ namespace VideoRentalSystem
                 MessageBox.Show(e.ToString(), "Error");
                 this.Close();
             }
+
         }
 
-        
-
-        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void tabPage1_Click(object sender, EventArgs e)
         {
-            new regForm().Show();
-            this.Hide();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             myConnection.Open();
-            string login = "SELECT * FROM users WHERE username= '" + usertxt.Text + "' and password= '" +passtxt.Text+ "' ";
-            myCommand = new SqlCommand(login, myConnection);
-            myReader = myCommand.ExecuteReader();
+            SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM Movies", myConnection);
+            DataTable dt = new DataTable();
+            sqlDa.Fill(dt);
 
-            if (myReader.Read() == true)
-            {
-                new dashboard().Show();
-                this.Hide();
-            }
-            else
-            {
-                MessageBox.Show("Invalid Login", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                usertxt.Text = "";
-                passtxt.Text = "";
-                usertxt.Focus();
-            }
+            dgv1.DataSource = dt;
         }
     }
 }

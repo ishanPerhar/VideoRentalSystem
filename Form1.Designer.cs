@@ -1,6 +1,6 @@
 ﻿namespace VideoRentalSystem
 {
-    partial class Form1
+    partial class loginfrom
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            linkLabel3 = new LinkLabel();
             label1 = new Label();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             button1 = new Button();
             linkLabel2 = new LinkLabel();
             linkLabel1 = new LinkLabel();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
-            linkLabel3 = new LinkLabel();
+            passtxt = new TextBox();
+            usertxt = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -52,12 +52,23 @@
             panel1.Controls.Add(button1);
             panel1.Controls.Add(linkLabel2);
             panel1.Controls.Add(linkLabel1);
-            panel1.Controls.Add(textBox2);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(passtxt);
+            panel1.Controls.Add(usertxt);
             panel1.Location = new Point(432, 263);
             panel1.Name = "panel1";
             panel1.Size = new Size(382, 257);
             panel1.TabIndex = 0;
+            // 
+            // linkLabel3
+            // 
+            linkLabel3.AutoSize = true;
+            linkLabel3.Location = new Point(151, 213);
+            linkLabel3.Name = "linkLabel3";
+            linkLabel3.Size = new Size(107, 15);
+            linkLabel3.TabIndex = 8;
+            linkLabel3.TabStop = true;
+            linkLabel3.Text = "Create An Account";
+            linkLabel3.LinkClicked += linkLabel3_LinkClicked;
             // 
             // label1
             // 
@@ -98,6 +109,7 @@
             button1.TabIndex = 4;
             button1.Text = "Login";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // linkLabel2
             // 
@@ -119,35 +131,25 @@
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Forgot Username";
             // 
-            // textBox2
+            // passtxt
             // 
-            textBox2.Location = new Point(107, 121);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(191, 23);
-            textBox2.TabIndex = 1;
-            textBox2.Text = "Password";
-            textBox2.TextAlign = HorizontalAlignment.Center;
+            passtxt.Location = new Point(107, 121);
+            passtxt.Name = "passtxt";
+            passtxt.Size = new Size(191, 23);
+            passtxt.TabIndex = 1;
+            passtxt.Text = "Password";
+            passtxt.TextAlign = HorizontalAlignment.Center;
             // 
-            // textBox1
+            // usertxt
             // 
-            textBox1.Location = new Point(107, 58);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(191, 23);
-            textBox1.TabIndex = 0;
-            textBox1.Text = "Username";
-            textBox1.TextAlign = HorizontalAlignment.Center;
+            usertxt.Location = new Point(107, 58);
+            usertxt.Name = "usertxt";
+            usertxt.Size = new Size(191, 23);
+            usertxt.TabIndex = 0;
+            usertxt.Text = "Username";
+            usertxt.TextAlign = HorizontalAlignment.Center;
             // 
-            // linkLabel3
-            // 
-            linkLabel3.AutoSize = true;
-            linkLabel3.Location = new Point(151, 213);
-            linkLabel3.Name = "linkLabel3";
-            linkLabel3.Size = new Size(107, 15);
-            linkLabel3.TabIndex = 8;
-            linkLabel3.TabStop = true;
-            linkLabel3.Text = "Create An Account";
-            // 
-            // Form1
+            // loginfrom
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -155,7 +157,7 @@
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(890, 565);
             Controls.Add(panel1);
-            Name = "Form1";
+            Name = "loginfrom";
             Text = "Login";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -170,8 +172,8 @@
         private Button button1;
         private LinkLabel linkLabel2;
         private LinkLabel linkLabel1;
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private TextBox passtxt;
+        private TextBox usertxt;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
         private Label label1;

@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace VideoRentalSystem
 {
-    public partial class Form2 : Form
+    public partial class regForm : Form
     {
-        public Form2()
+        public regForm()
         {
             InitializeComponent();
+        }
+
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //new loginfrom().Show();
+            //this.Hide();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace VideoRentalSystem
 {
-    partial class Form3
+    partial class dashboard
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(dashboard));
             panel1 = new Panel();
             pictureBox5 = new PictureBox();
             button5 = new Button();
@@ -242,7 +242,7 @@
             label2.TabIndex = 1;
             label2.Text = "Welcome!";
             // 
-            // Form3
+            // dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -250,7 +250,7 @@
             ClientSize = new Size(935, 538);
             Controls.Add(label2);
             Controls.Add(panel1);
-            Name = "Form3";
+            Name = "dashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form3";
             panel1.ResumeLayout(false);

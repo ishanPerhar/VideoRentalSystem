@@ -1,6 +1,6 @@
 ﻿namespace VideoRentalSystem
 {
-    partial class Form2
+    partial class regForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            button1 = new Button();
+            radioButton1 = new RadioButton();
             textBox10 = new TextBox();
             label10 = new Label();
             textBox11 = new TextBox();
@@ -51,15 +53,11 @@
             label2 = new Label();
             textBox1 = new TextBox();
             label1 = new Label();
-            radioButton1 = new RadioButton();
-            button1 = new Button();
-            linkLabel1 = new LinkLabel();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.Controls.Add(linkLabel1);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(radioButton1);
             panel1.Controls.Add(textBox10);
@@ -88,6 +86,26 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(524, 246);
             panel1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(423, 165);
+            button1.Name = "button1";
+            button1.Size = new Size(71, 39);
+            button1.TabIndex = 23;
+            button1.Text = "GO!";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Location = new Point(282, 199);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(77, 19);
+            radioButton1.TabIndex = 22;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Employee";
+            radioButton1.UseVisualStyleBackColor = true;
             // 
             // textBox10
             // 
@@ -265,37 +283,7 @@
             label1.TabIndex = 0;
             label1.Text = "Username:";
             // 
-            // radioButton1
-            // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(282, 199);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(77, 19);
-            radioButton1.TabIndex = 22;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Employee";
-            radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(423, 165);
-            button1.Name = "button1";
-            button1.Size = new Size(71, 39);
-            button1.TabIndex = 23;
-            button1.Text = "GO!";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // linkLabel1
-            // 
-            linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(378, 211);
-            linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(143, 15);
-            linkLabel1.TabIndex = 24;
-            linkLabel1.TabStop = true;
-            linkLabel1.Text = "Already Have An Account";
-            // 
-            // Form2
+            // regForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -303,7 +291,7 @@
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
             Controls.Add(panel1);
-            Name = "Form2";
+            Name = "regForm";
             Text = "Form2";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -335,7 +323,6 @@
         private Label label2;
         private TextBox textBox1;
         private Label label1;
-        private LinkLabel linkLabel1;
         private Button button1;
         private RadioButton radioButton1;
     }

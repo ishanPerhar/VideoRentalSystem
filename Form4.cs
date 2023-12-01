@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace VideoRentalSystem
 {
-    public partial class Form4 : Form
+    public partial class empdashboard : Form
     {
-        public Form4()
+        public empdashboard()
         {
             InitializeComponent();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace VideoRentalSystem
 {
-    partial class Form4
+    partial class empdashboard
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form4));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(empdashboard));
             panel1 = new Panel();
+            pictureBox8 = new PictureBox();
+            button6 = new Button();
+            pictureBox7 = new PictureBox();
             pictureBox5 = new PictureBox();
             button5 = new Button();
             pictureBox6 = new PictureBox();
@@ -45,10 +48,9 @@
             pictureBox1 = new PictureBox();
             panel3 = new Panel();
             label2 = new Label();
-            pictureBox7 = new PictureBox();
-            pictureBox8 = new PictureBox();
-            button6 = new Button();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -57,8 +59,6 @@
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -83,6 +83,42 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(200, 450);
             panel1.TabIndex = 2;
+            // 
+            // pictureBox8
+            // 
+            pictureBox8.Image = (Image)resources.GetObject("pictureBox8.Image");
+            pictureBox8.Location = new Point(149, 318);
+            pictureBox8.Name = "pictureBox8";
+            pictureBox8.Size = new Size(32, 30);
+            pictureBox8.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox8.TabIndex = 16;
+            pictureBox8.TabStop = false;
+            // 
+            // button6
+            // 
+            button6.Dock = DockStyle.Top;
+            button6.FlatStyle = FlatStyle.Flat;
+            button6.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button6.ForeColor = Color.FromArgb(0, 126, 249);
+            button6.ImageAlign = ContentAlignment.MiddleRight;
+            button6.Location = new Point(0, 312);
+            button6.Name = "button6";
+            button6.Size = new Size(200, 42);
+            button6.TabIndex = 15;
+            button6.Text = "Reports";
+            button6.TextImageRelation = TextImageRelation.TextBeforeImage;
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
+            // pictureBox7
+            // 
+            pictureBox7.Image = (Image)resources.GetObject("pictureBox7.Image");
+            pictureBox7.Location = new Point(149, 417);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new Size(32, 30);
+            pictureBox7.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox7.TabIndex = 14;
+            pictureBox7.TabStop = false;
             // 
             // pictureBox5
             // 
@@ -259,51 +295,18 @@
             label2.TabIndex = 0;
             label2.Text = "Welcome!";
             // 
-            // pictureBox7
-            // 
-            pictureBox7.Image = (Image)resources.GetObject("pictureBox7.Image");
-            pictureBox7.Location = new Point(149, 417);
-            pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(32, 30);
-            pictureBox7.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox7.TabIndex = 14;
-            pictureBox7.TabStop = false;
-            // 
-            // pictureBox8
-            // 
-            pictureBox8.Image = (Image)resources.GetObject("pictureBox8.Image");
-            pictureBox8.Location = new Point(149, 318);
-            pictureBox8.Name = "pictureBox8";
-            pictureBox8.Size = new Size(32, 30);
-            pictureBox8.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox8.TabIndex = 16;
-            pictureBox8.TabStop = false;
-            // 
-            // button6
-            // 
-            button6.Dock = DockStyle.Top;
-            button6.FlatStyle = FlatStyle.Flat;
-            button6.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button6.ForeColor = Color.FromArgb(0, 126, 249);
-            button6.ImageAlign = ContentAlignment.MiddleRight;
-            button6.Location = new Point(0, 312);
-            button6.Name = "button6";
-            button6.Size = new Size(200, 42);
-            button6.TabIndex = 15;
-            button6.Text = "All Orders";
-            button6.TextImageRelation = TextImageRelation.TextBeforeImage;
-            button6.UseVisualStyleBackColor = true;
-            // 
-            // Form4
+            // empdashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(panel3);
             Controls.Add(panel1);
-            Name = "Form4";
+            Name = "empdashboard";
             Text = "Form4";
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
@@ -314,8 +317,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
             ResumeLayout(false);
         }
 
