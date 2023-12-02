@@ -98,6 +98,7 @@
             button5.Text = "Logout";
             button5.TextImageRelation = TextImageRelation.TextBeforeImage;
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click_1;
             // 
             // pictureBox6
             // 

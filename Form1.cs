@@ -13,9 +13,9 @@ namespace VideoRentalSystem
 {
     public partial class loginfrom : Form
     {
-        public SqlConnection myConnection;
-        public SqlCommand myCommand;
-        public SqlDataReader myReader;
+        //public SqlConnection myConnection;
+        //public SqlCommand myCommand;
+        //public SqlDataReader myReader;
 
         public loginfrom()
         {
@@ -27,9 +27,9 @@ namespace VideoRentalSystem
 
             try
             {
-                myConnection.Open(); // Open connection
-                myCommand = new SqlCommand();
-                myCommand.Connection = myConnection; // Link the command stream to the connection
+                //myConnection.Open(); // Open connection
+                //myCommand = new SqlCommand();
+                //myCommand.Connection = myConnection; // Link the command stream to the connection
             }
             catch (Exception e)
             {
@@ -48,23 +48,63 @@ namespace VideoRentalSystem
 
         private void button1_Click(object sender, EventArgs e)
         {
-            myConnection.Open();
-            string login = "SELECT * FROM users WHERE username= '" + usertxt.Text + "' and password= '" +passtxt.Text+ "' ";
-            myCommand = new SqlCommand(login, myConnection);
-            myReader = myCommand.ExecuteReader();
+            String connectionString = "Server = DESKTOP-D0DDBSH; Database = Project; Trusted_Connection = yes;";
+            string username = usertxt.Text;
+            string password = passtxt.Text;
 
-            if (myReader.Read() == true)
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                new dashboard().Show();
-                this.Hide();
+                connection.Open();
+
+                string query = "SELECT user_id, username, employee FROM users WHERE username = @Username AND password = @Password";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Username", username);
+                    command.Parameters.AddWithValue("@Password", password);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int userId = reader.GetInt32(0);
+                            string retrievedUsername = reader.GetString(1);
+                            int userType = reader.GetInt32(2);
+
+                            // Perform actions based on successful login
+                            if (userType == 1)
+                            {
+                                // Close the current login form
+                                this.Hide();
+
+                                // Open the Employee Dashboard form
+                                empdashboard empDashboardForm = new empdashboard();
+                                empDashboardForm.ShowDialog();
+                            }
+                            else
+                            {
+                                // Close the current login form
+                                this.Hide();
+
+                                // Open the Dashboard form
+                                dashboard dashboardForm = new dashboard();
+                                dashboardForm.ShowDialog();
+                            }
+
+                            MessageBox.Show("Login successful!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid username or password");
+                           
+                        }
+                    }
+                }
             }
-            else
-            {
-                MessageBox.Show("Invalid Login", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                usertxt.Text = "";
-                passtxt.Text = "";
-                usertxt.Focus();
-            }
+        }
+        private int GenerateUniqueUserId()
+        {
+            //create a unique integer
+            return (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds + new Random().Next(1, 1000);
         }
     }
 }

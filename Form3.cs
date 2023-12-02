@@ -21,5 +21,14 @@ namespace VideoRentalSystem
         {
 
         }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            //close form
+            this.Close();
+
+            //exit app
+            Application.Exit();
+        }
     }
 }

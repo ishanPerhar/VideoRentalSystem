@@ -32,7 +32,6 @@
             panel1 = new Panel();
             pictureBox8 = new PictureBox();
             button6 = new Button();
-            pictureBox7 = new PictureBox();
             pictureBox5 = new PictureBox();
             button5 = new Button();
             pictureBox6 = new PictureBox();
@@ -50,7 +49,6 @@
             label2 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -66,7 +64,6 @@
             panel1.BackColor = Color.White;
             panel1.Controls.Add(pictureBox8);
             panel1.Controls.Add(button6);
-            panel1.Controls.Add(pictureBox7);
             panel1.Controls.Add(pictureBox5);
             panel1.Controls.Add(button5);
             panel1.Controls.Add(pictureBox6);
@@ -81,7 +78,7 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(200, 450);
+            panel1.Size = new Size(200, 533);
             panel1.TabIndex = 2;
             // 
             // pictureBox8
@@ -110,16 +107,6 @@
             button6.UseVisualStyleBackColor = true;
             button6.Click += button6_Click;
             // 
-            // pictureBox7
-            // 
-            pictureBox7.Image = (Image)resources.GetObject("pictureBox7.Image");
-            pictureBox7.Location = new Point(149, 417);
-            pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(32, 30);
-            pictureBox7.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox7.TabIndex = 14;
-            pictureBox7.TabStop = false;
-            // 
             // pictureBox5
             // 
             pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
@@ -137,13 +124,14 @@
             button5.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button5.ForeColor = Color.FromArgb(0, 126, 249);
             button5.ImageAlign = ContentAlignment.MiddleRight;
-            button5.Location = new Point(0, 408);
+            button5.Location = new Point(0, 491);
             button5.Name = "button5";
             button5.Size = new Size(200, 42);
             button5.TabIndex = 12;
             button5.Text = "Logout";
             button5.TextImageRelation = TextImageRelation.TextBeforeImage;
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // pictureBox6
             // 
@@ -169,6 +157,7 @@
             button4.Text = "Add Employee";
             button4.TextImageRelation = TextImageRelation.TextBeforeImage;
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // pictureBox4
             // 
@@ -219,6 +208,7 @@
             button2.Text = "Edit Movies";
             button2.TextImageRelation = TextImageRelation.TextBeforeImage;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // pictureBox2
             // 
@@ -282,7 +272,7 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(200, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(600, 450);
+            panel3.Size = new Size(745, 450);
             panel3.TabIndex = 3;
             // 
             // label2
@@ -299,14 +289,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(945, 533);
             Controls.Add(panel3);
             Controls.Add(panel1);
             Name = "empdashboard";
             Text = "Form4";
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
@@ -340,6 +329,5 @@
         private Label label2;
         private PictureBox pictureBox8;
         private Button button6;
-        private PictureBox pictureBox7;
     }
 }

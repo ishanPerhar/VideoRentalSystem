@@ -35,15 +35,15 @@
             addbtn = new Button();
             viewbtn = new Button();
             dgv1 = new DataGridView();
-            textBox5 = new TextBox();
+            txtCopies = new TextBox();
             label5 = new Label();
-            textBox4 = new TextBox();
+            txtFee = new TextBox();
             label4 = new Label();
-            textBox3 = new TextBox();
+            txtGenre = new TextBox();
             label3 = new Label();
-            textBox2 = new TextBox();
+            txtMovieName = new TextBox();
             label2 = new Label();
-            textBox1 = new TextBox();
+            txtM_Id = new TextBox();
             label1 = new Label();
             tabPage2 = new TabPage();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -70,15 +70,15 @@
             tabPage1.Controls.Add(addbtn);
             tabPage1.Controls.Add(viewbtn);
             tabPage1.Controls.Add(dgv1);
-            tabPage1.Controls.Add(textBox5);
+            tabPage1.Controls.Add(txtCopies);
             tabPage1.Controls.Add(label5);
-            tabPage1.Controls.Add(textBox4);
+            tabPage1.Controls.Add(txtFee);
             tabPage1.Controls.Add(label4);
-            tabPage1.Controls.Add(textBox3);
+            tabPage1.Controls.Add(txtGenre);
             tabPage1.Controls.Add(label3);
-            tabPage1.Controls.Add(textBox2);
+            tabPage1.Controls.Add(txtMovieName);
             tabPage1.Controls.Add(label2);
-            tabPage1.Controls.Add(textBox1);
+            tabPage1.Controls.Add(txtM_Id);
             tabPage1.Controls.Add(label1);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
@@ -99,6 +99,7 @@
             deletebtn.TabIndex = 14;
             deletebtn.Text = "DELETE";
             deletebtn.UseVisualStyleBackColor = false;
+            deletebtn.Click += deletebtn_Click;
             // 
             // editbtn
             // 
@@ -111,6 +112,7 @@
             editbtn.TabIndex = 13;
             editbtn.Text = "Edit";
             editbtn.UseVisualStyleBackColor = false;
+            editbtn.Click += editbtn_Click;
             // 
             // addbtn
             // 
@@ -122,6 +124,7 @@
             addbtn.TabIndex = 12;
             addbtn.Text = "Add";
             addbtn.UseVisualStyleBackColor = false;
+            addbtn.Click += addbtn_Click;
             // 
             // viewbtn
             // 
@@ -142,12 +145,12 @@
             dgv1.Size = new Size(531, 355);
             dgv1.TabIndex = 10;
             // 
-            // textBox5
+            // txtCopies
             // 
-            textBox5.Location = new Point(90, 185);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(100, 23);
-            textBox5.TabIndex = 9;
+            txtCopies.Location = new Point(90, 185);
+            txtCopies.Name = "txtCopies";
+            txtCopies.Size = new Size(100, 23);
+            txtCopies.TabIndex = 9;
             // 
             // label5
             // 
@@ -158,12 +161,13 @@
             label5.TabIndex = 8;
             label5.Text = "Copies: ";
             // 
-            // textBox4
+            // txtFee
             // 
-            textBox4.Location = new Point(90, 147);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(100, 23);
-            textBox4.TabIndex = 7;
+            txtFee.Location = new Point(90, 147);
+            txtFee.Name = "txtFee";
+            txtFee.Size = new Size(100, 23);
+            txtFee.TabIndex = 7;
+            txtFee.TextChanged += textBox4_TextChanged;
             // 
             // label4
             // 
@@ -174,12 +178,12 @@
             label4.TabIndex = 6;
             label4.Text = "Fee: ";
             // 
-            // textBox3
+            // txtGenre
             // 
-            textBox3.Location = new Point(90, 106);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(100, 23);
-            textBox3.TabIndex = 5;
+            txtGenre.Location = new Point(90, 106);
+            txtGenre.Name = "txtGenre";
+            txtGenre.Size = new Size(100, 23);
+            txtGenre.TabIndex = 5;
             // 
             // label3
             // 
@@ -190,12 +194,12 @@
             label3.TabIndex = 4;
             label3.Text = "Genre:";
             // 
-            // textBox2
+            // txtMovieName
             // 
-            textBox2.Location = new Point(90, 67);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 3;
+            txtMovieName.Location = new Point(90, 67);
+            txtMovieName.Name = "txtMovieName";
+            txtMovieName.Size = new Size(100, 23);
+            txtMovieName.TabIndex = 3;
             // 
             // label2
             // 
@@ -206,12 +210,12 @@
             label2.TabIndex = 2;
             label2.Text = "Movie Name: ";
             // 
-            // textBox1
+            // txtM_Id
             // 
-            textBox1.Location = new Point(90, 28);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 1;
+            txtM_Id.Location = new Point(90, 28);
+            txtM_Id.Name = "txtM_Id";
+            txtM_Id.Size = new Size(100, 23);
+            txtM_Id.TabIndex = 1;
             // 
             // label1
             // 
@@ -252,15 +256,15 @@
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
-        private TextBox textBox1;
+        private TextBox txtM_Id;
         private Label label1;
-        private TextBox textBox5;
+        private TextBox txtCopies;
         private Label label5;
-        private TextBox textBox4;
+        private TextBox txtFee;
         private Label label4;
-        private TextBox textBox3;
+        private TextBox txtGenre;
         private Label label3;
-        private TextBox textBox2;
+        private TextBox txtMovieName;
         private Label label2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private DataGridView dgv1;
