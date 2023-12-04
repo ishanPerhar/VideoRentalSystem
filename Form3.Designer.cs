@@ -44,6 +44,7 @@
             label1 = new Label();
             pictureBox1 = new PictureBox();
             label2 = new Label();
+            panel3 = new Panel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
@@ -149,6 +150,7 @@
             button3.Text = "Add Order";
             button3.TextImageRelation = TextImageRelation.TextBeforeImage;
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // pictureBox3
             // 
@@ -174,6 +176,7 @@
             button2.Text = "Current Orders";
             button2.TextImageRelation = TextImageRelation.TextBeforeImage;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // pictureBox2
             // 
@@ -243,17 +246,27 @@
             label2.TabIndex = 1;
             label2.Text = "Welcome!";
             // 
+            // panel3
+            // 
+            panel3.Dock = DockStyle.Left;
+            panel3.Location = new Point(200, 37);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(736, 501);
+            panel3.TabIndex = 2;
+            // 
             // dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(935, 538);
+            Controls.Add(panel3);
             Controls.Add(label2);
             Controls.Add(panel1);
             Name = "dashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form3";
+            Load += dashboard_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
@@ -284,5 +297,6 @@
         private PictureBox pictureBox5;
         private Button button5;
         private Label label2;
+        private Panel panel3;
     }
 }

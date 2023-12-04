@@ -77,7 +77,7 @@ namespace VideoRentalSystem
                                 this.Hide();
 
                                 // Open the Employee Dashboard form
-                                empdashboard empDashboardForm = new empdashboard();
+                                empdashboard empDashboardForm = new empdashboard(userId);
                                 empDashboardForm.ShowDialog();
                             }
                             else
@@ -86,7 +86,7 @@ namespace VideoRentalSystem
                                 this.Hide();
 
                                 // Open the Dashboard form
-                                dashboard dashboardForm = new dashboard();
+                                dashboard dashboardForm = new dashboard(userId);
                                 dashboardForm.ShowDialog();
                             }
 
@@ -107,4 +107,4 @@ namespace VideoRentalSystem
             return (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds + new Random().Next(1, 1000);
         }
     }
-}
+} 

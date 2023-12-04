@@ -46,10 +46,17 @@
             txtM_Id = new TextBox();
             label1 = new Label();
             tabPage2 = new TabPage();
+            report = new ComboBox();
+            txtMonth = new TextBox();
+            label6 = new Label();
+            button1 = new Button();
+            dataGridView1 = new DataGridView();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv1).BeginInit();
+            tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -228,13 +235,62 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(report);
+            tabPage2.Controls.Add(txtMonth);
+            tabPage2.Controls.Add(label6);
+            tabPage2.Controls.Add(button1);
+            tabPage2.Controls.Add(dataGridView1);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(792, 422);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "Actors";
+            tabPage2.Text = "Queries";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // report
+            // 
+            report.FormattingEnabled = true;
+            report.Items.AddRange(new object[] { "Most Rented Movies", "Top Renters", "Movies Never Rented", "Monthly Rentals", "Least Rented Genre" });
+            report.Location = new Point(209, 258);
+            report.Name = "report";
+            report.Size = new Size(390, 23);
+            report.TabIndex = 14;
+            // 
+            // txtMonth
+            // 
+            txtMonth.Location = new Point(317, 317);
+            txtMonth.Name = "txtMonth";
+            txtMonth.Size = new Size(171, 23);
+            txtMonth.TabIndex = 8;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(358, 299);
+            label6.Name = "label6";
+            label6.Size = new Size(80, 15);
+            label6.TabIndex = 7;
+            label6.Text = "Month: (1-12)";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(335, 371);
+            button1.Name = "button1";
+            button1.Size = new Size(131, 43);
+            button1.TabIndex = 6;
+            button1.Text = "Query";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_1;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(29, 17);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new Size(742, 196);
+            dataGridView1.TabIndex = 0;
             // 
             // Form5
             // 
@@ -248,6 +304,9 @@
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgv1).EndInit();
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -272,5 +331,10 @@
         private Button addbtn;
         private Button editbtn;
         private Button deletebtn;
+        private DataGridView dataGridView1;
+        private TextBox txtMonth;
+        private Label label6;
+        private Button button1;
+        private ComboBox report;
     }
 }

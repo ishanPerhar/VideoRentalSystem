@@ -10,11 +10,15 @@ using System.Windows.Forms;
 
 namespace VideoRentalSystem
 {
+
+
     public partial class empdashboard : Form
     {
-        public empdashboard()
+        private int userId;
+        public empdashboard(int userId)
         {
             InitializeComponent();
+            this.userId = userId;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -24,22 +28,21 @@ namespace VideoRentalSystem
 
         private void button2_Click(object sender, EventArgs e)
         {
+
             // Create an instance of Form5
             Form5 form5 = new Form5();
 
-            // Set the TopLevel property to false to allow it to be embedded in panel3
             form5.TopLevel = false;
 
-            // Set the FormBorderStyle property to None to remove the border of Form5
             form5.FormBorderStyle = FormBorderStyle.None;
 
-            // Set the Dock property to Fill to make Form5 fill the entire panel3
+            // Set the Dock property to fill the entire panel
             form5.Dock = DockStyle.Fill;
 
-            // Add Form5 to panel3
+            // Add Form5 to panel
             panel3.Controls.Add(form5);
 
-            // Show Form5
+            // Show Form
             form5.Show();
         }
 

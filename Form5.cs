@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Security.Cryptography.X509Certificates;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace VideoRentalSystem
 {
@@ -23,6 +24,7 @@ namespace VideoRentalSystem
         public Form5()
         {
             InitializeComponent();
+
 
 
 
@@ -145,6 +147,147 @@ namespace VideoRentalSystem
 
         }
 
+        private void Query1()
+        {
+            try
+            {
+                string query = @"
+            SELECT
+                m.M_Id,
+                m.Movie_name,
+                COUNT(o.OrderID) AS Rentals
+            FROM
+                Movies m
+            LEFT JOIN
+                Orders o ON m.M_Id = o.M_Id
+            GROUP BY
+                m.M_Id, m.Movie_name
+            ORDER BY
+                Rentals DESC;";
+
+                ExecuteAndDisplayQuery(query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Query2()
+        {
+            try
+            {
+                string query = @"
+            SELECT
+                u.user_id,
+                u.firstname,
+                COUNT(o.OrderID) AS RentalCount
+            FROM
+                Users u
+            LEFT JOIN
+                Orders o ON u.user_id = o.userid
+            GROUP BY
+                u.user_id, u.firstname
+            ORDER BY
+                RentalCount DESC;";
+
+                ExecuteAndDisplayQuery(query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Query3()
+        {
+            try
+            {
+                string query = @"
+            SELECT
+                M_Id,
+                Movie_name
+            FROM
+                Movies
+            WHERE
+                M_Id NOT IN (SELECT DISTINCT M_Id FROM Orders);";
+
+                ExecuteAndDisplayQuery(query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Query4()
+        {
+            try
+            {
+                int selectedMonth = Convert.ToInt32(txtMonth.Text);
+
+                //SQL query
+                string query = $"SELECT COUNT(OrderID) AS RentalCount FROM Orders WHERE MONTH(OrderDate) = {selectedMonth};";
+
+                //show in grid
+                ExecuteAndDisplayQuery(query);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Query5()
+        {
+            try
+            {
+                string query = @"
+            SELECT
+                m.Genre,
+                COUNT(o.OrderID) AS RentalCount
+            FROM
+                Movies m
+            LEFT JOIN
+                Orders o ON m.M_Id = o.M_Id
+            GROUP BY
+                m.Genre
+            ORDER BY
+                RentalCount ASC;";
+
+                ExecuteAndDisplayQuery(query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExecuteAndDisplayQuery(string query)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        dataGridView1.DataSource = dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void deletebtn_Click(object sender, EventArgs e)
         {
             // Get user input
@@ -255,7 +398,7 @@ namespace VideoRentalSystem
                         command.Parameters.AddWithValue("@Copies", copiesToEdit);
                         command.Parameters.AddWithValue("@M_IdToEdit", mIdToEdit);
 
-                        
+
                         int rowsAffected = command.ExecuteNonQuery();
 
                         if (rowsAffected > 0)
@@ -275,6 +418,47 @@ namespace VideoRentalSystem
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                // Get the selected item from the ComboBox
+                string selectedReport = report.SelectedItem.ToString();
+
+                // Determine which query to execute based on the selected report
+                switch (selectedReport)
+                {
+                    case "Most Rented Movies":
+                        Query1();
+                        break;
+
+                    case "Top Renters":
+                        Query2();
+                        break;
+
+                    case "Movies Never Rented":
+                        Query3();
+                        break;
+
+                    case "Monthly Rentals":
+                        Query4();
+                        break;
+
+                    case "Least Rented Genre":
+                        Query5();
+                        break;
+
+                    default:
+                        MessageBox.Show("No Report selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

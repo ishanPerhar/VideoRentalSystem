@@ -30,14 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(empdashboard));
             panel1 = new Panel();
-            pictureBox8 = new PictureBox();
-            button6 = new Button();
             pictureBox5 = new PictureBox();
             button5 = new Button();
-            pictureBox6 = new PictureBox();
-            button4 = new Button();
-            pictureBox4 = new PictureBox();
-            button3 = new Button();
             pictureBox3 = new PictureBox();
             button2 = new Button();
             pictureBox2 = new PictureBox();
@@ -46,30 +40,19 @@
             label1 = new Label();
             pictureBox1 = new PictureBox();
             panel3 = new Panel();
-            label2 = new Label();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.White;
-            panel1.Controls.Add(pictureBox8);
-            panel1.Controls.Add(button6);
             panel1.Controls.Add(pictureBox5);
             panel1.Controls.Add(button5);
-            panel1.Controls.Add(pictureBox6);
-            panel1.Controls.Add(button4);
-            panel1.Controls.Add(pictureBox4);
-            panel1.Controls.Add(button3);
             panel1.Controls.Add(pictureBox3);
             panel1.Controls.Add(button2);
             panel1.Controls.Add(pictureBox2);
@@ -81,36 +64,10 @@
             panel1.Size = new Size(200, 533);
             panel1.TabIndex = 2;
             // 
-            // pictureBox8
-            // 
-            pictureBox8.Image = (Image)resources.GetObject("pictureBox8.Image");
-            pictureBox8.Location = new Point(149, 318);
-            pictureBox8.Name = "pictureBox8";
-            pictureBox8.Size = new Size(32, 30);
-            pictureBox8.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox8.TabIndex = 16;
-            pictureBox8.TabStop = false;
-            // 
-            // button6
-            // 
-            button6.Dock = DockStyle.Top;
-            button6.FlatStyle = FlatStyle.Flat;
-            button6.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button6.ForeColor = Color.FromArgb(0, 126, 249);
-            button6.ImageAlign = ContentAlignment.MiddleRight;
-            button6.Location = new Point(0, 312);
-            button6.Name = "button6";
-            button6.Size = new Size(200, 42);
-            button6.TabIndex = 15;
-            button6.Text = "Reports";
-            button6.TextImageRelation = TextImageRelation.TextBeforeImage;
-            button6.UseVisualStyleBackColor = true;
-            button6.Click += button6_Click;
-            // 
             // pictureBox5
             // 
             pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(149, 505);
+            pictureBox5.Location = new Point(149, 500);
             pictureBox5.Name = "pictureBox5";
             pictureBox5.Size = new Size(32, 30);
             pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -132,57 +89,6 @@
             button5.TextImageRelation = TextImageRelation.TextBeforeImage;
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
-            // 
-            // pictureBox6
-            // 
-            pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
-            pictureBox6.Location = new Point(149, 276);
-            pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(32, 30);
-            pictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox6.TabIndex = 11;
-            pictureBox6.TabStop = false;
-            // 
-            // button4
-            // 
-            button4.Dock = DockStyle.Top;
-            button4.FlatStyle = FlatStyle.Flat;
-            button4.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button4.ForeColor = Color.FromArgb(0, 126, 249);
-            button4.ImageAlign = ContentAlignment.MiddleRight;
-            button4.Location = new Point(0, 270);
-            button4.Name = "button4";
-            button4.Size = new Size(200, 42);
-            button4.TabIndex = 8;
-            button4.Text = "Add Employee";
-            button4.TextImageRelation = TextImageRelation.TextBeforeImage;
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(149, 234);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(32, 30);
-            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox4.TabIndex = 7;
-            pictureBox4.TabStop = false;
-            // 
-            // button3
-            // 
-            button3.Dock = DockStyle.Top;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button3.ForeColor = Color.FromArgb(0, 126, 249);
-            button3.ImageAlign = ContentAlignment.MiddleRight;
-            button3.Location = new Point(0, 228);
-            button3.Name = "button3";
-            button3.Size = new Size(200, 42);
-            button3.TabIndex = 6;
-            button3.Text = "Add Order";
-            button3.TextImageRelation = TextImageRelation.TextBeforeImage;
-            button3.UseVisualStyleBackColor = true;
             // 
             // pictureBox3
             // 
@@ -268,22 +174,11 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(label2);
-            panel3.Dock = DockStyle.Top;
+            panel3.Dock = DockStyle.Right;
             panel3.Location = new Point(200, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(745, 450);
+            panel3.Size = new Size(745, 533);
             panel3.TabIndex = 3;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(0, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(145, 37);
-            label2.TabIndex = 0;
-            label2.Text = "Welcome!";
             // 
             // empdashboard
             // 
@@ -295,17 +190,12 @@
             Name = "empdashboard";
             Text = "Form4";
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -314,10 +204,6 @@
         private Panel panel1;
         private PictureBox pictureBox5;
         private Button button5;
-        private PictureBox pictureBox6;
-        private Button button4;
-        private PictureBox pictureBox4;
-        private Button button3;
         private PictureBox pictureBox3;
         private Button button2;
         private PictureBox pictureBox2;
@@ -326,8 +212,5 @@
         private Label label1;
         private PictureBox pictureBox1;
         private Panel panel3;
-        private Label label2;
-        private PictureBox pictureBox8;
-        private Button button6;
     }
 }
