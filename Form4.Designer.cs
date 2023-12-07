@@ -111,7 +111,7 @@
             button2.Name = "button2";
             button2.Size = new Size(200, 42);
             button2.TabIndex = 4;
-            button2.Text = "Edit Movies";
+            button2.Text = "Menu";
             button2.TextImageRelation = TextImageRelation.TextBeforeImage;
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;

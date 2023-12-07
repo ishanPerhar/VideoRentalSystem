@@ -37,9 +37,7 @@
             pictureBox4 = new PictureBox();
             button3 = new Button();
             pictureBox3 = new PictureBox();
-            button2 = new Button();
             pictureBox2 = new PictureBox();
-            button1 = new Button();
             panel2 = new Panel();
             label1 = new Label();
             pictureBox1 = new PictureBox();
@@ -65,9 +63,7 @@
             panel1.Controls.Add(pictureBox4);
             panel1.Controls.Add(button3);
             panel1.Controls.Add(pictureBox3);
-            panel1.Controls.Add(button2);
             panel1.Controls.Add(pictureBox2);
-            panel1.Controls.Add(button1);
             panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
@@ -104,7 +100,7 @@
             // pictureBox6
             // 
             pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
-            pictureBox6.Location = new Point(149, 276);
+            pictureBox6.Location = new Point(149, 192);
             pictureBox6.Name = "pictureBox6";
             pictureBox6.Size = new Size(32, 30);
             pictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -118,7 +114,7 @@
             button4.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button4.ForeColor = Color.FromArgb(0, 126, 249);
             button4.ImageAlign = ContentAlignment.MiddleRight;
-            button4.Location = new Point(0, 270);
+            button4.Location = new Point(0, 186);
             button4.Name = "button4";
             button4.Size = new Size(200, 42);
             button4.TabIndex = 8;
@@ -129,7 +125,7 @@
             // pictureBox4
             // 
             pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(149, 234);
+            pictureBox4.Location = new Point(149, 150);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(32, 30);
             pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -143,11 +139,11 @@
             button3.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button3.ForeColor = Color.FromArgb(0, 126, 249);
             button3.ImageAlign = ContentAlignment.MiddleRight;
-            button3.Location = new Point(0, 228);
+            button3.Location = new Point(0, 144);
             button3.Name = "button3";
             button3.Size = new Size(200, 42);
             button3.TabIndex = 6;
-            button3.Text = "Add Order";
+            button3.Text = "Orders";
             button3.TextImageRelation = TextImageRelation.TextBeforeImage;
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
@@ -162,22 +158,6 @@
             pictureBox3.TabIndex = 5;
             pictureBox3.TabStop = false;
             // 
-            // button2
-            // 
-            button2.Dock = DockStyle.Top;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button2.ForeColor = Color.FromArgb(0, 126, 249);
-            button2.ImageAlign = ContentAlignment.MiddleRight;
-            button2.Location = new Point(0, 186);
-            button2.Name = "button2";
-            button2.Size = new Size(200, 42);
-            button2.TabIndex = 4;
-            button2.Text = "Current Orders";
-            button2.TextImageRelation = TextImageRelation.TextBeforeImage;
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
@@ -187,21 +167,6 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 3;
             pictureBox2.TabStop = false;
-            // 
-            // button1
-            // 
-            button1.Dock = DockStyle.Top;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.ForeColor = Color.FromArgb(0, 126, 249);
-            button1.ImageAlign = ContentAlignment.MiddleRight;
-            button1.Location = new Point(0, 144);
-            button1.Name = "button1";
-            button1.Size = new Size(200, 42);
-            button1.TabIndex = 2;
-            button1.Text = "Dashboard";
-            button1.TextImageRelation = TextImageRelation.TextBeforeImage;
-            button1.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -286,14 +251,12 @@
         private Panel panel2;
         private PictureBox pictureBox1;
         private Label label1;
-        private Button button1;
         private PictureBox pictureBox2;
         private PictureBox pictureBox6;
         private Button button4;
         private PictureBox pictureBox4;
         private Button button3;
         private PictureBox pictureBox3;
-        private Button button2;
         private PictureBox pictureBox5;
         private Button button5;
         private Label label2;

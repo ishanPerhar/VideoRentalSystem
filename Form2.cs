@@ -23,8 +23,7 @@ namespace VideoRentalSystem
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //new loginfrom().Show();
-            //this.Hide();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -61,7 +60,7 @@ namespace VideoRentalSystem
                     // Create and execute the SQL command
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        // Add parameters to prevent SQL injection
+                        // Add user input to query
                         command.Parameters.AddWithValue("@user_id", userId);
                         command.Parameters.AddWithValue("@username", username);
                         command.Parameters.AddWithValue("@password", password);

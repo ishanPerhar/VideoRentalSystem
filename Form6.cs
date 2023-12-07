@@ -33,19 +33,18 @@ namespace VideoRentalSystem
                 {
                     connection.Open();
 
-                    // SQL query to select all from the Movies table
+                    // SQL query 
                     string query = "SELECT * FROM Movies WHERE Copies > 0";
 
-                    // SqlDataAdapter to fetch data
+                    // fetch data
                     SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
 
-                    // Create a DataTable to store data
+                    // store data
                     DataTable dataTable = new DataTable();
 
-                    // fill the datatable with data from the table
+                    // fill the table
                     adapter.Fill(dataTable);
 
-                    // connect the datatable to the datagrid
                     dgv1.DataSource = dataTable;
                 }
             }
@@ -66,7 +65,7 @@ namespace VideoRentalSystem
             String connectionString = "Server = DESKTOP-D0DDBSH; Database = Project; Trusted_Connection = yes;";
             int userId = this.userId;
             int movieId;
-            int orderId = GenerateUniqueOrderId();
+
 
 
 
@@ -133,25 +132,64 @@ namespace VideoRentalSystem
                 {
                     connection.Open();
 
-                    // SQL query to select all columns from the Movies table
+                    // SQL query
                     string query = "SELECT * FROM Movies";
 
-                    // Create a SqlDataAdapter to fetch data
+                    // fetch data
                     SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
 
-                    // Create a DataTable to store the fetched data
+                    // Create datatable
                     DataTable dataTable = new DataTable();
 
-                    // Fill the DataTable with data from the Movies table
+                    // Fill the DataTable
                     adapter.Fill(dataTable);
 
-                    // Bind the DataTable to the DataGridView
                     dgv1.DataSource = dataTable;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error refreshing DataGridView: " + ex.Message);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Open the connection
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // query to select the Orders of the user 
+                    string query = "SELECT Movies.Movie_name, Orders.ReturnDate, Orders.Status  FROM Orders " +
+                       "INNER JOIN Movies ON Orders.M_Id = Movies.M_Id " +
+                       "WHERE Orders.userid = @UserID";
+
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        //Add the user ID
+                        command.Parameters.AddWithValue("@UserID", userId);
+
+                        //fetch data
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+
+                        //store data
+                        DataTable dataTable = new DataTable();
+
+                        //Fill the datatable
+                        adapter.Fill(dataTable);
+
+                        //Connect the datatable to the datagrid
+                        dgv2.DataSource = dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
     }

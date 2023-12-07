@@ -23,7 +23,7 @@ namespace VideoRentalSystem
 
             String connectionString = "Server = DESKTOP-D0DDBSH; Database = Project; Trusted_Connection = yes;";
 
-            SqlConnection myConnection = new SqlConnection(connectionString); // Timeout in seconds
+            SqlConnection myConnection = new SqlConnection(connectionString); 
 
             try
             {
@@ -70,8 +70,8 @@ namespace VideoRentalSystem
                             string retrievedUsername = reader.GetString(1);
                             int userType = reader.GetInt32(2);
 
-                            // Perform actions based on successful login
-                            if (userType == 1)
+                            // successful login
+                            if (userType == 1) //employee
                             {
                                 // Close the current login form
                                 this.Hide();
@@ -80,7 +80,7 @@ namespace VideoRentalSystem
                                 empdashboard empDashboardForm = new empdashboard(userId);
                                 empDashboardForm.ShowDialog();
                             }
-                            else
+                            else //customer
                             {
                                 // Close the current login form
                                 this.Hide();

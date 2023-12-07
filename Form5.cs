@@ -19,12 +19,15 @@ namespace VideoRentalSystem
         public SqlCommand myCommand;
         public SqlDataReader myReader;
 
+        private int userId;
+
         String connectionString = "Server = DESKTOP-D0DDBSH; Database = Project; Trusted_Connection = yes;";
 
-        public Form5()
+        public Form5(int userId)
         {
             InitializeComponent();
 
+            this.userId = userId;
 
 
 
@@ -43,6 +46,7 @@ namespace VideoRentalSystem
                 this.Close();
             }
 
+
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -59,19 +63,18 @@ namespace VideoRentalSystem
                 {
                     connection.Open();
 
-                    // SQL query to select all from the Movies table
+                    // SQL query
                     string query = "SELECT * FROM Movies";
 
-                    // SqlDataAdapter to fetch data
+                    // fetch data
                     SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
 
-                    // Create a DataTable to store data
+                    // store data
                     DataTable dataTable = new DataTable();
 
                     // fill the datatable with data from the table
                     adapter.Fill(dataTable);
 
-                    // connect the datatable to the datagrid
                     dgv1.DataSource = dataTable;
                 }
             }
@@ -132,7 +135,7 @@ namespace VideoRentalSystem
                         MessageBox.Show("Movie added successfully!");
 
                         //refresh data grid view 
-                        RefreshDataGridView();
+                        RefreshDataGridView(dgv1);
                     }
                 }
             }
@@ -227,7 +230,9 @@ namespace VideoRentalSystem
                 int selectedMonth = Convert.ToInt32(txtMonth.Text);
 
                 //SQL query
-                string query = $"SELECT COUNT(OrderID) AS RentalCount FROM Orders WHERE MONTH(OrderDate) = {selectedMonth};";
+                string query = $"SELECT COUNT(OrderID) AS RentalCount " +
+                    $"FROM Orders " +
+                    $"WHERE MONTH(OrderDate) = {selectedMonth};";
 
                 //show in grid
                 ExecuteAndDisplayQuery(query);
@@ -243,6 +248,7 @@ namespace VideoRentalSystem
         {
             try
             {
+
                 string query = @"
             SELECT
                 m.Genre,
@@ -263,15 +269,42 @@ namespace VideoRentalSystem
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void Query6()
+        {
+            try
+            {
+                int selectedMonth = Convert.ToInt32(txtMonth.Text);
+                string query = @"
+            SELECT
+                m.Genre,
+                COUNT(o.OrderID) AS RentalCount
+            FROM
+                Movies m
+            LEFT JOIN
+                Orders o ON m.M_Id = o.M_Id AND MONTH(o.OrderDate) = " + selectedMonth + @"
+            GROUP BY
+                m.Genre
+            ORDER BY
+                RentalCount ASC;";
+
+                ExecuteAndDisplayQuery(query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void ExecuteAndDisplayQuery(string query)
         {
             try
             {
+                //open connection
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
 
+                    //execute query, get data, fill datatable, bind to dgv
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter(command);
@@ -321,7 +354,7 @@ namespace VideoRentalSystem
                             MessageBox.Show("Movie deleted successfully!");
 
                             //refresh grid
-                            RefreshDataGridView();
+                            RefreshDataGridView(dgv1);
                         }
                         else
                         {
@@ -335,29 +368,29 @@ namespace VideoRentalSystem
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-        private void RefreshDataGridView()
+        private void RefreshDataGridView(DataGridView dgv)
         {
             try
             {
-                // Open the connection
+                // Open connection
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    // SQL query to select all columns from the Movies table
+                    // SQL query
                     string query = "SELECT * FROM Movies";
 
-                    // Create a SqlDataAdapter to fetch data
+                    // fetch data
                     SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
 
-                    // Create a DataTable to store the fetched data
+                    // Create a DataTable to store data
                     DataTable dataTable = new DataTable();
 
-                    // Fill the DataTable with data from the Movies table
+                    // Fill dataTable
                     adapter.Fill(dataTable);
 
-                    // Bind the DataTable to the DataGridView
-                    dgv1.DataSource = dataTable;
+                    // add to datadridview
+                    dgv.DataSource = dataTable;
                 }
             }
             catch (Exception ex)
@@ -406,7 +439,7 @@ namespace VideoRentalSystem
                             MessageBox.Show("Movie edit was successful!");
 
                             // Refresh the DataGridView
-                            RefreshDataGridView();
+                            RefreshDataGridView(dgv1);
                         }
                         else
                         {
@@ -425,10 +458,10 @@ namespace VideoRentalSystem
         {
             try
             {
-                // Get the selected item from the ComboBox
+                // Get item from the ComboBox
                 string selectedReport = report.SelectedItem.ToString();
 
-                // Determine which query to execute based on the selected report
+                // switch for selected report
                 switch (selectedReport)
                 {
                     case "Most Rented Movies":
@@ -450,6 +483,9 @@ namespace VideoRentalSystem
                     case "Least Rented Genre":
                         Query5();
                         break;
+                    case "Least Rented Genre in the Month":
+                        Query6();
+                        break;
 
                     default:
                         MessageBox.Show("No Report selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -459,6 +495,388 @@ namespace VideoRentalSystem
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // Get the order ID
+            if (int.TryParse(txtoid.Text, out int orderId))
+            {
+                // Call function to execute query and update status
+                UpdateStatusInDatabase(orderId);
+                //load orders table into datagridview
+                LoadOrdersIntoDataGridView();
+            }
+            else
+            {
+                MessageBox.Show("Invalid order ID.");
+            }
+        }
+        private void UpdateStatusInDatabase(int orderId)
+        {
+            try
+            {
+                // Open the connection
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // update the Status column
+                    string query = "UPDATE Orders SET Status = 'Returned' WHERE OrderId = @OrderId";
+
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        // Add the OrderId
+                        command.Parameters.AddWithValue("@OrderId", orderId);
+
+                        // Execute query
+                        int rowsAffected = command.ExecuteNonQuery();
+
+
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Status updated successfully.");
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Order ID not found. No rows updated.");
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+        private void LoadOrdersIntoDataGridView()
+        {
+            try
+            {
+                // Open the connection
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // query Orders table
+                    string query = "SELECT * FROM Orders";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        // fetch data
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+
+                        // store data
+                        DataTable dataTable = new DataTable();
+
+                        // Fill the datatable
+                        adapter.Fill(dataTable);
+
+                        dgv2.DataSource = dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Open the connection
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // SQL query to select all from the Movies table
+                    string query = "SELECT * FROM Movies WHERE Copies > 0";
+
+                    // fetch data
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+
+                    // store data
+                    DataTable dataTable = new DataTable();
+
+                    // fill the datatable
+                    adapter.Fill(dataTable);
+
+                    dgv3.DataSource = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            String connectionString = "Server = DESKTOP-D0DDBSH; Database = Project; Trusted_Connection = yes;";
+            int userId = this.userId;
+            int movieId;
+
+
+
+
+            if (int.TryParse(txtmid.Text, out movieId))
+            {
+                DateTime orderDate = orderdate.Value;
+                //add 7 days assuming one week rentals
+                DateTime returnDate = orderDate.AddDays(7);
+                // Initial status
+                string status = "Not Returned";
+
+                // Insert order into database
+                string query = "INSERT INTO Orders (userid, M_Id, OrderDate, ReturnDate, Status) VALUES (@UserId, @MovieId, @OrderDate, @ReturnDate, @Status)";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+
+                        command.Parameters.AddWithValue("@UserId", userId);
+                        command.Parameters.AddWithValue("@MovieId", movieId);
+                        command.Parameters.AddWithValue("@OrderDate", orderDate);
+                        command.Parameters.AddWithValue("@ReturnDate", returnDate);
+                        command.Parameters.AddWithValue("@Status", status);
+
+                        command.ExecuteNonQuery();
+
+
+                        // Update available copies in the Movies table
+                        string updateQuery = "UPDATE Movies SET Copies = Copies - 1 WHERE M_Id = @MovieId";
+
+                        using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection))
+                        {
+                            updateCommand.Parameters.AddWithValue("@MovieId", movieId);
+
+                            updateCommand.ExecuteNonQuery();
+
+                            MessageBox.Show("Order placed successfully.");
+
+                            RefreshDataGridView(dgv3);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid movie ID. Please enter a valid numeric value.");
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                String connectionString = "Server = DESKTOP-D0DDBSH; Database = Project; Trusted_Connection = yes;";
+                // Create a SqlConnection
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    // Open the SQL connection
+                    sqlConnection.Open();
+
+                    // fetch data
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM Orders", sqlConnection);
+
+                    // store the data
+                    DataTable dataTable = new DataTable();
+
+                    // Fill the DataTable
+                    sqlDataAdapter.Fill(dataTable);
+
+                    dgv4.DataSource = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    // Open connection
+                    sqlConnection.Open();
+
+                    // Create a query
+                    string query = "SELECT * FROM Orders WHERE Status = 'Not Returned' AND ReturnDate < @CurrentDate";
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                    {
+                        // Add the current date
+                        sqlCommand.Parameters.AddWithValue("@CurrentDate", DateTime.Now);
+
+                        // fetch data
+                        SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                        // store data
+                        DataTable dataTable = new DataTable();
+
+                        sqlDataAdapter.Fill(dataTable);
+
+                        dgv4.DataSource = dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Get the UserID convert it to an integer
+                if (int.TryParse(txtuid.Text, out int userId))
+                {
+
+                    using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                    {
+                        // Open the SQL connection
+                        sqlConnection.Open();
+
+                        // Create a query
+                        string query = "SELECT * FROM Orders WHERE UserID = @UserID";
+                        using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                        {
+                            // Add the UserID
+                            sqlCommand.Parameters.AddWithValue("@UserID", userId);
+
+                            // fetch data
+                            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                            // store the data
+                            DataTable dataTable = new DataTable();
+
+                            // Fill the DataTable 
+                            sqlDataAdapter.Fill(dataTable);
+
+                            dgv4.DataSource = dataTable;
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid UserID (numeric value).");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    // Open connection
+                    sqlConnection.Open();
+
+                    // Create a query
+                    string query = "SELECT * FROM Users";
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                    {
+                        // fetch data
+                        SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                        // store the data
+                        DataTable dataTable = new DataTable();
+
+                        // Fill the DataTable
+                        sqlDataAdapter.Fill(dataTable);
+
+
+                        dgv5.DataSource = dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void dgv5_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            // Create an instance of registration form
+            regForm regForm = new regForm();
+
+            // Show form
+            regForm.ShowDialog();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Get the user_id  convert it to an int
+                if (int.TryParse(txtid.Text, out int userId))
+                {
+
+                    using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                    {
+                        // Open connection
+                        sqlConnection.Open();
+
+                        // Create query
+                        string query = "DELETE FROM Users WHERE user_id = @UserID";
+                        using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                        {
+                            // Add the user_id
+                            sqlCommand.Parameters.AddWithValue("@UserID", userId);
+
+                            // Execute query
+                            int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("User deleted successfully.");
+                            }
+                            else
+                            {
+                                MessageBox.Show("error occurred");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid user_id");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
     }
