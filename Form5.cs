@@ -522,29 +522,64 @@ namespace VideoRentalSystem
                 {
                     connection.Open();
 
-                    // update the Status column
-                    string query = "UPDATE Orders SET Status = 'Returned' WHERE OrderId = @OrderId";
-
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    // Start a transaction for atomicity
+                    using (SqlTransaction transaction = connection.BeginTransaction())
                     {
-                        // Add the OrderId
-                        command.Parameters.AddWithValue("@OrderId", orderId);
-
-                        // Execute query
-                        int rowsAffected = command.ExecuteNonQuery();
-
-
-
-                        if (rowsAffected > 0)
+                        try
                         {
-                            MessageBox.Show("Status updated successfully.");
+                            // Update  Orders table
+                            string orderQuery = "UPDATE Orders SET Status = 'Returned' WHERE OrderId = @OrderId";
 
+                            using (SqlCommand orderCommand = new SqlCommand(orderQuery, connection, transaction))
+                            {
+                                // Add the OrderId to the query
+                                orderCommand.Parameters.AddWithValue("@OrderId", orderId);
+
+                                // Execute the order update
+                                int orderRowsAffected = orderCommand.ExecuteNonQuery();
+
+                                // Check if the order update was successful
+                                if (orderRowsAffected > 0)
+                                {
+                                    // Increment the Copies in the Movies table
+                                    string movieQuery = "UPDATE Movies SET Copies = Copies + 1 WHERE M_Id = (SELECT M_Id FROM Orders WHERE OrderId = @OrderId)";
+
+                                    using (SqlCommand movieCommand = new SqlCommand(movieQuery, connection, transaction))
+                                    {
+                                        // Add the OrderId to query
+                                        movieCommand.Parameters.AddWithValue("@OrderId", orderId);
+
+                                        // Execute query
+                                        int movieRowsAffected = movieCommand.ExecuteNonQuery();
+
+                                        // Check if update was successful
+                                        if (movieRowsAffected > 0)
+                                        {
+                                            // Commit the transaction if both updates were successful
+                                            transaction.Commit();
+                                            MessageBox.Show("Status and Copies updated.");
+                                        }
+                                        else
+                                        {
+                                            // Rollback the transaction if the movie update failed
+                                            transaction.Rollback();
+                                            MessageBox.Show("Movie update failed.");
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    // if the order update failed
+                                    transaction.Rollback();
+                                    MessageBox.Show("Order ID not found. No rows updated.");
+                                }
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Order ID not found. No rows updated.");
-
+                            
+                            transaction.Rollback();
+                            MessageBox.Show("Error: " + ex.Message );
                         }
                     }
                 }
